@@ -1,8 +1,28 @@
+import time
+
 import detector
 import categorizer
 
-print ("Free Rider Seat Cam started!")
+def start_seatcam():
+    print("#############################")
+    print("Begin sampling images")
+    print("#############################")
+    print("")
 
-detector.init()
+    detector.init()
+    rating = detector.getBalancedOccupancy()
 
-print(detector.getBalancedOccupancy())
+    print("")
+    print("#############################")
+    print("#############################")
+    print("")
+    print ("Occupancy rating:")
+    print(rating)
+    print("")
+    print("#############################")
+    print("#############################")
+    print("")
+
+while(True):
+    start_seatcam()
+    time.sleep(30)

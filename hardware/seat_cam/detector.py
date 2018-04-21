@@ -42,7 +42,7 @@ def getCurrentOccupancy():
         if(count>0):
             for index in range (0, count):
                 #print '[BLOCK_TYPE=%d ANGLE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks[index].type, blocks[index].angle, blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height)
-                print(seat_classifier.getClassifiedDebugMessage(blocks[index].angle, blocks[index].x, blocks[index].y)
+                print(seat_classifier.getClassifiedDebugMessage(blocks[index].angle, blocks[index].x, blocks[index].y))
     		addBlock(blocks[index].x, blocks[index].y, blocks[index].angle)
 	return freeSeats
 
