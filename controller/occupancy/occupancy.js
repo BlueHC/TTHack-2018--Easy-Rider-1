@@ -1,6 +1,7 @@
 var occupancyDB = require('../../database/occupancy/occupancy.js'); 
 
 function getOccupancy (req, res) {
+    console.log("GetOccupancy");
     var mediumID = req.query.mediumID;
     if (!mediumID){
         res.status(400).send({

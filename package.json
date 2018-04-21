@@ -3,9 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "client": "cd public && yarn start",
+    "server": "nodemon app.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
+    "@angular/router": "^5.2.10",
     "async": "^2.6.0",
     "body-parser": "^1.18.2",
     "cfenv": "1.0.x",
