@@ -29,5 +29,5 @@ This application demonstrates a simple, reusable Node.js web application based o
 		"station": "Bremen Vahr",
 		"longitude": 25134.1232,
 		"latitude": 1234423.3222,
-		"mediumID": "Regio"
+		"mediumID": 1
 	}
