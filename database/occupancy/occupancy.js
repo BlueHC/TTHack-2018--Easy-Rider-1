@@ -4,7 +4,7 @@ const pool = new Pool({
     connectionString: connectionString,
   })
 
- function getOccupancy (mediumID){
+ function getOccupancy (mediumID, resp){
      var result = 0;
     const client = new Client({
         connectionString: connectionString,
@@ -16,15 +16,15 @@ const pool = new Pool({
       result = res;
         if (err) {
           console.log(err.stack)
+          resp.status(400).send("Error");
         } else {
-          console.log(res.rows[0])
+          resp.status(200).send({
+            message: "OK",
+            result: res.rows
+          })
         }
       })
-            
-    return {
-        status: 200,
-        res: result
-    }
+
 }
 
 function setOccupancy (mediumID, body){

@@ -8,8 +8,7 @@ function getOccupancy (req, res) {
             message: "No Medium ID"
         });
     }else {
-        var result = occupancyDB.getOccupancy(mediumID);
-        res.status(200).send(result);
+        var result = occupancyDB.getOccupancy(mediumID, res);
     }
 }
 

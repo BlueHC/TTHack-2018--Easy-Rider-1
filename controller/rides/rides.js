@@ -9,15 +9,7 @@ function Ride (req, res) {
         res.status(400).send({
             message: "Location Data Missing"
         });
-    }else if (!req.body.time){
-        res.status(400).send({
-            message: "Time information missing"
-        });
-    }else if (!req.body.mode){
-        res.status(400).send({
-            message: "Transportation mode missing"
-        });
-    }else if (!req.body.transportID){
+    }else if (!req.body.mediumID){
         res.status(400).send({
             message: "Transportation ID missing"
         });
