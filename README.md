@@ -15,7 +15,7 @@ This application demonstrates a simple, reusable Node.js web application based o
 ## API-Endpunkte
 
 1. GET - http://easyriderbackend.eu-gb.mybluemix.net/occupancy?mediumID=1 - Gibt die Auslastung für das in der Query angegebene Medium zurück
-2. SET - http://easyriderbackend.eu-gb.mybluemix.net/occupancy?mediumID=1
+2. POST - http://easyriderbackend.eu-gb.mybluemix.net/occupancy?mediumID=1
   {
 	  "latitude": 123432.222,
 	  "longitude": 42332.21,
