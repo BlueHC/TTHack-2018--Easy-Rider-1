@@ -10,14 +10,14 @@ const pool = new Pool({
         connectionString: connectionString,
       });
       client.connect();
-    const queryText = `SELECT amount FROM filling_levels WHERE status = 1 AND medium_id = $1 ORDER BY time DESC LIMIT 1;`
+    const queryText = `SELECT amount, time FROM filling_levels WHERE status = 1 AND medium_id = $1 ORDER BY time DESC LIMIT 1;`
     const values = [mediumID];
     client.query(queryText, values, (err, res) => {
+      result = res;
         if (err) {
           console.log(err.stack)
         } else {
-            result = res.rows[0];
-          console.log("Result: " + res.rows[0])
+          console.log(res.rows[0])
         }
       })
             
