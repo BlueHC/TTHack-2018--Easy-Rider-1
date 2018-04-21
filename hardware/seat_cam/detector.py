@@ -25,7 +25,7 @@ def getBalancedOccupancy():
     balancedRating = 0
     countRating = 0
     for i in range(0, 10):
-        rating = categorizer.categorize(detector.getCurrentOccupancy())
+        rating = categorizer.categorize(getCurrentOccupancy(), 4, 2)
         #PoC
         if(rating != 0):
             countRating += 1
@@ -36,7 +36,7 @@ def getCurrentOccupancy():
     global freeSeats 
     freeSeats = []
     blocks = BlockArray(100)
-    for i in range(0, 50000):
+    for i in range(0, 150000):
 	count = pixy_get_blocks(100, blocks)
         if(count>0):
             for index in range (0, count):
@@ -47,11 +47,13 @@ def getCurrentOccupancy():
 def addBlock(x, y, angle):
     #[type, score, x, y]
     seat_type = (angle < 90) and "standing" or "seat"
+    flag = True
     for entry in freeSeats:
         if(getDistance(x, y, entry[2], entry[3]) < 15):
             entry[3] = entry[3] + 100
-        else:
-            freeSeats.append([seat_type, 300, x, y])
+	    flag = False
+    if(flag):
+    	freeSeats.append([seat_type, 300, x, y])
 
 def getDistance(x, y, u, v):
-    return math.sqrt((x-u)**2, (y-v)**2)
+    return math.sqrt((x-u)**2 + (y-v)**2)
