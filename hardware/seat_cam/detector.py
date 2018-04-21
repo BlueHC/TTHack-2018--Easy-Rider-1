@@ -7,6 +7,7 @@ from pixy import *
 from ctypes import *
 
 import categorizer
+import seat_classifier
 
 class Blocks (Structure):
   _fields_ = [ ("type", c_uint),
@@ -25,7 +26,7 @@ def getBalancedOccupancy():
     balancedRating = 0
     countRating = 0
     for i in range(0, 10):
-        rating = categorizer.categorize(getCurrentOccupancy(), 4, 2)
+        rating = categorizer.estimateOccupancyRate(getCurrentOccupancy(), 4, 2)
         #PoC
         if(rating != 0):
             countRating += 1
@@ -40,13 +41,14 @@ def getCurrentOccupancy():
 	count = pixy_get_blocks(100, blocks)
         if(count>0):
             for index in range (0, count):
-                print '[BLOCK_TYPE=%d ANGLE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks[index].type, blocks[index].angle, blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height)
+                #print '[BLOCK_TYPE=%d ANGLE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks[index].type, blocks[index].angle, blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height)
+                print(seat_classifier.getClassifiedDebugMessage(blocks[index].angle, blocks[index].x, blocks[index].y)
     		addBlock(blocks[index].x, blocks[index].y, blocks[index].angle)
 	return freeSeats
 
 def addBlock(x, y, angle):
     #[type, score, x, y]
-    seat_type = (angle < 90) and "standing" or "seat"
+    seat_type = seat_classifier.classifySeatType(angle)
     flag = True
     for entry in freeSeats:
         if(getDistance(x, y, entry[2], entry[3]) < 15):

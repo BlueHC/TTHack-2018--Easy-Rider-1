@@ -1,7 +1,7 @@
 SCORE_FACTOR = 20
 STADNING_MANIPULATOR = 0.1
 
-def categorize(freeSeats, allSeatsInVP, allStandingsInVP):
+def estimateOccupancyRate(freeSeats, allSeatsInVP, allStandingsInVP):
     #[type, score, x, y]
     allSeatsInVP = float(allSeatsInVP)
     allStandingsInVP = float(allStandingsInVP)
