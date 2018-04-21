@@ -1,0 +1,5 @@
+hardware/rider_device/.vscode
+hardware/rider_device/_pycache_
+hardware/rider_device/venv
+
+*.pyc
