@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS transactions CASCADE;
 DROP TABLE IF EXISTS billings CASCADE;
 DROP TABLE IF EXISTS filling_levels CASCADE ;
+DROP TABLE IF EXISTS plan CASCADE ;
+
 
 CREATE TABLE mediums(
   medium_id SERIAL PRIMARY KEY,
@@ -60,12 +62,13 @@ CREATE TABLE transactions (
   transaction_id SERIAL PRIMARY KEY,
   device_uuid TEXT NOT NULL,
   station TEXT,
-  longitute DOUBLE PRECISION,
+  longitude DOUBLE PRECISION,
   latitude DOUBLE PRECISION,
   time TIMESTAMP WITH TIME ZONE,
   medium_id INTEGER REFERENCES mediums,
   fiat_amount DOUBLE PRECISION,
   ref_transaction_id INTEGER,
+  comment TEXT,
   status INTEGER NOT NULL DEFAULT 1,
   last_update TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
@@ -73,7 +76,7 @@ CREATE TABLE transactions (
 
 CREATE TABLE filling_levels(
   filling_level_id SERIAL PRIMARY KEY,
-  station TEXT,
+  medium_id INTEGER REFERENCES mediums,
   longitude DOUBLE PRECISION,
   latitude DOUBLE PRECISION,
   time TIMESTAMP WITH TIME ZONE,
@@ -91,3 +94,27 @@ CREATE TABLE user_devices (
   status INTEGER NOT NULL DEFAULT 1,
   last_update TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
+
+CREATE TABLE plans (
+  plan_id SERIAL PRIMARY KEY,
+  mediums INTEGER[],
+  partner TEXT,
+  name TEXT NOT NULL,
+  station_number INTEGER,
+  status INTEGER NOT NULL DEFAULT 1,
+  last_update TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+CREATE OR REPLACE VIEW trans_history(first_name, last_name, partner, vehicle, from_time, to_time, from_loc, to_loc, status) as
+select u.first_name, u.last_name, m2.partner, m2.name, t.time, t2.time, t.station, t2.station
+, case when t2.transaction_id is null then 'in process'
+    when b.billing_id is not null then 'payed'
+    else 'to pay' end as  status
+from users u
+join user_devices ud ON u.user_id = ud.user_id
+join transactions t ON (t.device_uuid = ud.device_uuid AND t.ref_transaction_id IS NULL)
+join mediums m2 ON t.medium_id = m2.medium_id
+left outer join transactions t2 on (t.transaction_id = t2.ref_transaction_id)
+left outer join billings b on (b.user_id = u.user_id and t.transaction_id = ANY(b.transaction_ids))
+order by u.user_id asc, t.time asc
+;
