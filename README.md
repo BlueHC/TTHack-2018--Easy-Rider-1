@@ -22,3 +22,15 @@ This application demonstrates a simple, reusable Node.js web application based o
 	  "amount": 99
   }
   
+3. POST - http://easyriderbackend.eu-gb.mybluemix.net/ride
+
+	{
+        	"userID": 1234,
+        	"station": "Bremen Vahr",
+		"longitude": 25134.1232,
+		"latitude": 1234423.3222,
+		"time": 12341234,
+		"mode": "Regio",
+		"transportID": 1242,
+		"beginning": true
+	}
