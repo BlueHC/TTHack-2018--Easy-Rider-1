@@ -9,7 +9,7 @@ const pool = new Pool({
       connectionString: connectionString,
     });
     client.connect();
-  const queryText = `select h.user_id, h.first_name, h.last_name, h.partner, h.vehicle , h.from_time, h.to_time, h.from_loc, h.to_loc, h.status from trans_history h where h.user_id = 1;`
+  const queryText = `select h.user_id, h.first_name, h.last_name, h.partner, h.vehicle , h.from_time, h.to_time, h.from_loc, h.to_loc, h.status from trans_history h where h.user_id = 2;`
   const values = [];
   client.query(queryText, values, (err, res) => {
       if (err) {
