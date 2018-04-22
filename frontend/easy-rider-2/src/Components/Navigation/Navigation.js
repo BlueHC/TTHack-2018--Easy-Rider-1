@@ -19,7 +19,7 @@ export default class Navigation extends Component {
                             <Route path="/component1" children={( {match} ) => (<a className={match ? 'nav-link my-lg-0 active' : 'nav-link my-lg-0'} href="/occupancy">Fahrzeugbelegung</a>)}/>
                         }
                         {
-                            <Route path="/component2" children={( {match} ) => (<a className={match ? 'nav-link my-lg-0 active' : 'nav-link my-lg-0'} href="/component2">Component2</a>)}/>
+                            <Route path="/component2" children={( {match} ) => (<a className={match ? 'nav-link my-lg-0 active' : 'nav-link my-lg-0'} href="/component2">Fahrtübersicht</a>)}/>
                         }
                        
                     </ul>

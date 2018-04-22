@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS transactions CASCADE;
 DROP TABLE IF EXISTS billings CASCADE;
 DROP TABLE IF EXISTS filling_levels CASCADE ;
 DROP TABLE IF EXISTS plan CASCADE ;
+DROP VIEW IF EXISTS trans_history;
 
 
 CREATE TABLE mediums(
@@ -105,8 +106,8 @@ CREATE TABLE plans (
   last_update TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 
-CREATE OR REPLACE VIEW trans_history(first_name, last_name, partner, vehicle, from_time, to_time, from_loc, to_loc, status) as
-select u.first_name, u.last_name, m2.partner, m2.name, t.time, t2.time, t.station, t2.station
+CREATE OR REPLACE VIEW trans_history(user_id, first_name, last_name, partner, vehicle, from_time, to_time, from_loc, to_loc, status) as
+select u.user_id, u.first_name, u.last_name, m2.partner, m2.name, t.time, t2.time, t.station, t2.station
 , case when t2.transaction_id is null then 'in process'
     when b.billing_id is not null then 'payed'
     else 'to pay' end as  status
@@ -118,3 +119,4 @@ left outer join transactions t2 on (t.transaction_id = t2.ref_transaction_id)
 left outer join billings b on (b.user_id = u.user_id and t.transaction_id = ANY(b.transaction_ids))
 order by u.user_id asc, t.time asc
 ;
+

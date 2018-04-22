@@ -10,7 +10,7 @@ INSERT INTO user_groups (name, rate_id) VALUES ('Student', 2);
 INSERT INTO user_groups (name, rate_id) VALUES ('Rentner', 2);
 
 INSERT INTO mediums (medium_id, name, capacity, partner) VALUES (2, 'BUS133', 40, 'HVV');
-INSERT INTO mediums (medium_id, name, capacity, partner) VALUES (1, 'BUS15', 40, 'HVV');
+INSERT INTO mediums (medium_id, name, capacity, partner) VALUES (1, 'BUS15', 6, 'HVV');
 INSERT INTO mediums (medium_id, name, capacity, partner) VALUES (3, 'CAB1', 4, 'TAXI');
 
 INSERT INTO plans (mediums, partner, name, station_number) VALUES (ARRAY[1], 'HVV', 'Bf. Altona', 1);
@@ -28,3 +28,4 @@ INSERT INTO users (first_name, last_name, user_group_id) VALUES ('Malte', 'von E
 INSERT INTO users (first_name, last_name, user_group_id) VALUES ('John', 'Do', 1);
 
 INSERT INTO user_devices (user_id, device_uuid, device_typ) VALUES (1,'XXXX2', 'mobile');
+INSERT INTO user_devices (user_id, device_uuid, device_typ) VALUES (2,'erna00', 'beacon');
