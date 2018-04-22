@@ -4,6 +4,27 @@ const pool = new Pool({
     connectionString: connectionString,
   })
 
+  function getRide(resp){
+    const client = new Client({
+      connectionString: connectionString,
+    });
+    client.connect();
+  const queryText = `select h.user_id, h.first_name, h.last_name, h.partner, h.vehicle , h.from_time, h.to_time, h.from_loc, h.to_loc, h.status from trans_history h where h.user_id = 1;`
+  const values = [];
+  client.query(queryText, values, (err, res) => {
+      if (err) {
+        console.log(err.stack)
+        resp.status(400).send({
+          message: "Error"
+        })
+      } else {
+        resp.status(200).send({
+          response: res.rows
+        })
+      }
+    })
+  }
+
  function addRide (ride){
     const client = new Client({
         connectionString: connectionString,
@@ -26,3 +47,4 @@ const pool = new Pool({
     }
 }
 module.exports.addRide = addRide;
+module.exports.getRide = getRide;

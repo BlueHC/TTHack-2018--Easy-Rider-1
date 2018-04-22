@@ -1,5 +1,9 @@
 var ridesDB = require('../../database/rides/rides.js'); 
 
+function getRides(res){
+    ridesDB.getRide(res);
+}
+
 function Ride (req, res) {
     if (!req.body.userID){
         res.status(400).send({
@@ -19,3 +23,4 @@ function Ride (req, res) {
     }
 }
 module.exports.Ride = Ride;
+module.exports.getRides = getRides;
