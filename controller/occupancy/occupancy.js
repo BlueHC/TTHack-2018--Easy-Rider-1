@@ -18,6 +18,14 @@ function setOccupancy (req, res) {
         res.status(400).send({
             message: "No Medium ID"
         });
+    }if (!req.body.amount){
+        res.status(400).send({
+            message: "amount missing"
+        });
+    }else if ( !req.body.longitude || !req.body.latitude){
+        res.status(400).send({
+            message: "Location Data Missing"
+        });
     }else {
         var result = occupancyDB.setOccupancy(mediumID, req.body);
         res.status(200).send(result);

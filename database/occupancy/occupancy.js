@@ -10,8 +10,15 @@ const pool = new Pool({
         connectionString: connectionString,
       });
       client.connect();
-    const queryText = `SELECT amount, time FROM filling_levels WHERE status = 1 AND medium_id = $1 ORDER BY time DESC LIMIT 1;`
-    const values = [mediumID];
+    const queryText = `select fl.medium_id, fl.time , fl.amount, (100 - fl.amount::INTEGER ) as occupacity
+    from filling_levels fl
+     LEFT OUTER JOIN mediums m2 ON fl.medium_id = m2.medium_id
+    where fl.filling_level_id in (
+    select max(filling_level_id)
+    from filling_levels
+    where status =1 and medium_id is not null
+    group by medium_id);`
+    const values = [];
     client.query(queryText, values, (err, res) => {
       result = res;
         if (err) {
