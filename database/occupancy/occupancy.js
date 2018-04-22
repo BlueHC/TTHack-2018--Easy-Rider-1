@@ -30,6 +30,7 @@ const pool = new Pool({
             result: res.rows
           })
         }
+        client.end();
       })
 
 }
@@ -49,8 +50,9 @@ function setOccupancy (mediumID, body){
           console.log(res.rows[0])
           // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
         }
+        client.end();
       })
-            
+
     return {
         status: 200,
         message: "Ride written to database"
