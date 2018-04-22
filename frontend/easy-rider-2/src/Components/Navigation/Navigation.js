@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 
+import easyriderLogo from './easyrider_logo.png'
+
 export default class Navigation extends Component {
     render() {
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/start">Easy Rider</a>
+                <a className="navbar-brand" href="/start">
+                    <img src={easyriderLogo} alt="" style={{"width": "175px"}}></img>
+                </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
