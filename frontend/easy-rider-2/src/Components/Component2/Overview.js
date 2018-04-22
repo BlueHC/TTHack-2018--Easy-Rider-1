@@ -64,6 +64,10 @@ export default class Component2 extends Component {
           var data;
           return (
               <div>
+                  <br/>
+                  <h3 style={{textAlign: 'center'}}>Fahrtübersicht</h3>
+                  <br/>
+
                   <div class="row">
                   <div class="col-2"></div>
                   <div class="col-8">
