@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 
-import Component1 from './Components/Component1/Component1';
+import Occupancy from './Components/Occupancy/OccupancyComponent';
 import Component2 from './Components/Component2/Overview';
 import Navigation from './Components/Navigation/Navigation';
 
@@ -12,7 +12,7 @@ class App extends Component {
 
         <Navigation/>
 
-        <Route path='/component1' component={Component1}/>
+        <Route path='/occupancy' component={Occupancy}/>
 
         <Route path='/component2' component={Component2}/>
 

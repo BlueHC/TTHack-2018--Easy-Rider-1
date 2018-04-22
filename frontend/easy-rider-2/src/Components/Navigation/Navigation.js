@@ -16,7 +16,7 @@ export default class Navigation extends Component {
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav mr-auto">
                         {
-                            <Route path="/component1" children={( {match} ) => (<a className={match ? 'nav-link my-lg-0 active' : 'nav-link my-lg-0'} href="/component1">Component1</a>)}/>
+                            <Route path="/component1" children={( {match} ) => (<a className={match ? 'nav-link my-lg-0 active' : 'nav-link my-lg-0'} href="/occupancy">Fahrzeugbelegung</a>)}/>
                         }
                         {
                             <Route path="/component2" children={( {match} ) => (<a className={match ? 'nav-link my-lg-0 active' : 'nav-link my-lg-0'} href="/component2">Component2</a>)}/>
