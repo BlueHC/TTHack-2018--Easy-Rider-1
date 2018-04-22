@@ -31,7 +31,7 @@ export default class Occupancy extends Component {
     }
 
     getIconClass(amount) {
-        if(amount > 85) return "text-success"
+        if(amount > 72) return "text-success"
         if(amount > 35) return "text-warning"
         return "text-danger"
     }
