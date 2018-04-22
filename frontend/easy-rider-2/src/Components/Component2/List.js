@@ -9,6 +9,8 @@ export default class List extends Component {
             list_items: [[], [], [], [], []]
         };
     }
+
+
     render() {
         return(
             <table class="table">

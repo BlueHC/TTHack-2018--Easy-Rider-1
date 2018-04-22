@@ -5,13 +5,15 @@ import FontAwesome from 'react-fontawesome';
 
 export default class Component1 extends Component {
     constructor(props) {
+        console.log("here");
         super(props);
+
     }
    
     render() {
         return(
             <div>
-                <h1>Test1</h1>
+                <h1>c</h1>
             </div>
         );
     }
